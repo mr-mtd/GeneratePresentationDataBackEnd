@@ -1,0 +1,47 @@
+server:
+  port: 8081
+
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+  file:
+    name: myapp.log
+    path: /var/log/myapp/
+
+spring:
+  profiles:
+    active: dev
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8081
+  ssl:
+    enabled: false
+
+logging:
+  level:
+    root: DEBUG
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8443
+
+
+logging:
+  level:
+    root: INFO
+    com.example: ERROR
+  file:
+    name: myapp-prod.log
+    path: /var/log/myapp/
