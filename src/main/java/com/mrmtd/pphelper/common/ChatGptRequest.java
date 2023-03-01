@@ -8,13 +8,7 @@ public class ChatGptRequest {
 	    private Integer maxTokens;
 	    private Double temperature;
 	    
-		public ChatGptRequest(String model, String prompt, Integer maxTokens, Double temperature) {
-			super();
-			this.model = model;
-			this.prompt = prompt;
-			this.maxTokens = maxTokens;
-			this.temperature = temperature;
-		}
+
 		
 		public String getModel() {
 			return model;

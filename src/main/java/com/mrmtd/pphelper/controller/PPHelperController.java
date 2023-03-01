@@ -27,8 +27,14 @@ public class PPHelperController {
 	@PostMapping("/generatePPT")
 	public ResponseEntity<?> generatePPT( @RequestBody ChatGptRequest req) {
 
-		ChatGptRequest requestFirst = new ChatGptRequest("text-davinci-003", "As a doctor, write me a speech on: "
-				+ req.getPrompt() + "in plain text no line breaks", req.getMaxTokens(), req.getTemperature());
+		StringBuilder prompt = new StringBuilder("As a doctor, write me a speech on: ");
+		prompt.append(req.getPrompt()).append(" in plain text no line breaks");
+		
+		ChatGptRequest requestFirst = new ChatGptRequest();
+		requestFirst.setMaxTokens(req.getMaxTokens());
+		requestFirst.setModel(req.getModel());
+		requestFirst.setPrompt(prompt.toString());
+		requestFirst.setTemperature(req.getTemperature());
 		
 		
 		String resp = (openAiClient.sendCompletionRequest(
